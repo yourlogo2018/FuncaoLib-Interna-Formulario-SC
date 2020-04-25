@@ -1,0 +1,141 @@
+<?php
+class EmptyClassJustForTheStyleLib {}
+
+function styleGeral() {
+    echo <<<HTML
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha256-NuCn4IvuZXdBaFKJOAcsU2Q3ZpwbdFisd5dux4jkQ5w=" crossorigin="anonymous" />
+    <style>
+		@import url('https://fonts.googleapis.com/css?family=Nunito&display=swap');
+		
+		body {
+			font-family: 'Nunito', sans-serif !important;
+			background-color: #f9f9f9 !important;
+		}
+		.card {
+			margin: 10px 0 !important;
+			box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.12), 0 1px 5px 0 rgba(0,0,0,.2);
+   			border: none;
+    		border-radius: 0;
+		}
+	</style>	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+HTML;
+}
+
+function styleForm() {
+    echo <<<HTML
+    <style>
+		.scFormBorder {
+			border-style: none !important;
+			background-color: transparent !important;
+		}
+		.scFormToolbar {
+			background-color: transparent !important;
+			border-style: none !important;
+		}
+		.scFormTable {
+			border-style: none !important;
+		}
+		.scFormBlock {
+			background-color: transparent !important;
+			border-style: none !important;
+			height: 80px !important;
+			padding: 0 !important;
+		}
+	
+		.scFormToolbarPadding {
+			padding: 10px 0 !important;
+		}
+		.scFormFieldErrorMessage {
+			padding-left: 0 !important;
+		}
+
+    	.scFormHeader {
+			background-color: transparent;
+			border: none;
+		}
+		
+		.scFormHeaderFont {
+			color: #000000;
+			font-family: 'Nunito', sans-serif !important;
+			font-size: 25px;
+		}
+		
+		.scFormLabelOddFormat {
+			color: #000000;
+			font-family: 'Nunito', sans-serif !important;
+			font-size: 13px;
+			font-weight: 100;
+			
+		}
+		
+		.form-control:focus {
+			border: none;
+			border-radius: 0;
+			border-bottom: 1px solid #ff4081;
+			box-shadow: 0 1px 0 0 #ff4081;
+			transition: box-shadow .3s,border .3s;
+		}
+		
+		.form-control-sm {
+			border: none;
+			border-bottom: 1px solid #9e9e9e;
+			border-radius: 0;
+		}
+		
+		
+	</style>
+	<script>
+		$(document).ready(function() {
+		
+			$('body').fadeIn(500);
+				
+			
+			$("input, select")
+				.addClass("form-control form-control-sm");
+				
+			$("[data-toggle='tooltip']").tooltip();
+			
+			var count = 0;
+			$(".scFormTable > tbody > tr").each(function(index) {
+				$(this).addClass("row");
+				$(this).find("td").addClass("col-lg col-md-6 col-sm-12 col-xs-12");
+				count++;
+			});
+
+			$(".scFormBlockFont")
+				.css({"font-size" :  "1.5rem"});
+				
+			$(".scFormTable")
+				.parent()
+				.addClass("card");
+				
+			$(".scFormTable")
+				.addClass("card-body");
+			
+		});
+	</script>
+HTML;
+}
+
+//PEGA O TIPO DE APLICAÇÃO
+$appType = explode("_", $this->Ini->nm_cod_apl)[0];
+
+//DESABILITAR MOBILE DO SCRIPTCASE
+$_SESSION['scriptcase']['display_mobile'] = false; 
+$_SESSION['scriptcase']['device_mobile'] = false;
+
+switch($appType) {
+	case "form":
+		styleGeral();
+		styleForm();
+		break;
+	case "cliente":
+		styleGeral();
+		styleForm();
+		break;
+}
+?>
